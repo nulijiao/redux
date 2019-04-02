@@ -112,9 +112,15 @@ function assertReducerShape(reducers) {
  * @returns {Function} A reducer function that invokes every reducer inside the
  * passed object, and builds a state object with the same shape.
  */
+// {
+//   add: function(){},
+//   delete: function(){},
+//   edit: function(){}
+// }
 export default function combineReducers(reducers) {
   const reducerKeys = Object.keys(reducers)
   const finalReducers = {}
+  // 收集 reducer 的
   for (let i = 0; i < reducerKeys.length; i++) {
     const key = reducerKeys[i]
 
@@ -178,3 +184,4 @@ export default function combineReducers(reducers) {
     return hasChanged ? nextState : state
   }
 }
+// 作用比对 state reducer 合成数组接受 createStore 中的调用接受 state 和 action，改变 state进行对比判断是否进行返回新的 state

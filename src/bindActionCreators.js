@@ -47,4 +47,5 @@ export default function bindActionCreators(actionCreators, dispatch) {
     }
   }
   return boundActionCreators
+  // 传入 action 自动 dispatch
 }

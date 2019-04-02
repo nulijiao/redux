@@ -11,7 +11,7 @@ import __DO_NOT_USE__ActionTypes from './utils/actionTypes'
  * If the function has been minified and NODE_ENV !== 'production', warn the user.
  */
 function isCrushed() {}
-
+// 判断是否被压缩，这个函数名字主要是为了防止被压缩
 if (
   process.env.NODE_ENV !== 'production' &&
   typeof isCrushed.name === 'string' &&

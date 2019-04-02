@@ -180,6 +180,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
    * Note that, if you use a custom middleware, it may wrap `dispatch()` to
    * return something else (for example, a Promise you can await).
    */
+  // reducer（state，action）
   function dispatch(action) {
     if (!isPlainObject(action)) {
       throw new Error(

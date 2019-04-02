@@ -19,6 +19,7 @@ import compose from './compose'
 export default function applyMiddleware(...middlewares) {
   return createStore => (...args) => {
     const store = createStore(...args)
+    // 这时候只会发送 store 内部的 reducer
     let dispatch = () => {
       throw new Error(
         'Dispatching while constructing your middleware is not allowed. ' +
@@ -30,9 +31,14 @@ export default function applyMiddleware(...middlewares) {
       getState: store.getState,
       dispatch: (...args) => dispatch(...args)
     }
+    // ({getState, dispatch}) => (next) => (action) =>{}
     const chain = middlewares.map(middleware => middleware(middlewareAPI))
+    //  (next) => (action) =>{}
     dispatch = compose(...chain)(store.dispatch)
-
+// dispatch = m1(m2(store.dispatch))
+// next 都有了参数
+    // m2 next 对应 store.dispatch
+// 所有的 dispatch 内部的都变成了 m1(m2(store.dispatch)) 形式，不要轻易调用 dispatch 会造成从头再来啊，最后一个 next
     return {
       ...store,
       dispatch
